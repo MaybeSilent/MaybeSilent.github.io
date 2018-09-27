@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MaybeSilent</title>
+    <description>never give up</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 27 Sep 2018 22:38:15 +0800</pubDate>
+    <lastBuildDate>Thu, 27 Sep 2018 22:38:15 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>jekyll搭建个人博客</title>
+        <description>&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+&lt;p&gt;这是利用GitHub搭建的个人博客，初衷希望自己能够记录平时所学，同时也能够分享出来&lt;/p&gt;
+&lt;h3 id=&quot;博客来源&quot;&gt;博客来源&lt;/h3&gt;
+&lt;p&gt;博客模板来源于&lt;a href=&quot;https://github.com/nilzzzz/nilzzzz.github.io/&quot;&gt;GitHub&lt;/a&gt;，个人比较喜欢的风格。对作者表示感谢！！！
+在作者的基础上删除了一部分功能，同时更换了背景图片等相应内容。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 27 Sep 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/09/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B/</guid>
+        
+        <category>博客</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
