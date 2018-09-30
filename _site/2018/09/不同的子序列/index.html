@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>MaybeSilent</title>
-  <meta name="description" content="never give up">
+  <title>不同子序列问题</title>
+  <meta name="description" content="不同的子序列给定一个字符串 S 和一个字符串 T，计算在 S 的子序列中 T 出现的个数递归思路  递归推进条件，S当前字符与字符串T当前字符相等，则向前推进  递归终止条件，字符串长度与T相等，则相同字符串结果+1  时间复杂度大，相当于在2^n基础上进行剪枝    动态规划    子序列问题的动态规划    ...">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="MaybeSilent">
-  <meta name="twitter:description" content="never give up">
+  <meta name="twitter:title" content="不同子序列问题">
+  <meta name="twitter:description" content="不同的子序列给定一个字符串 S 和一个字符串 T，计算在 S 的子序列中 T 出现的个数递归思路  递归推进条件，S当前字符与字符串T当前字符相等，则向前推进  递归终止条件，字符串长度与T相等，则相同字符串结果+1  时间复杂度大，相当于在2^n基础上进行剪枝    动态规划    子序列问题的动态规划    ...">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="MaybeSilent">
-  <meta property="og:description" content="never give up">
+  <meta property="og:title" content="不同子序列问题">
+  <meta property="og:description" content="不同的子序列给定一个字符串 S 和一个字符串 T，计算在 S 的子序列中 T 出现的个数递归思路  递归推进条件，S当前字符与字符串T当前字符相等，则向前推进  递归终止条件，字符串长度与T相等，则相同字符串结果+1  时间复杂度大，相当于在2^n基础上进行剪枝    动态规划    子序列问题的动态规划    ...">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/tags/">
+  <link rel="canonical" href="http://localhost:4000/2018/09/%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AD%90%E5%BA%8F%E5%88%97/">
   <link rel="alternate" type="application/rss+xml" title="MaybeSilent" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -120,85 +120,70 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
+    <h1 class="post-title">不同子序列问题</h1>
     <div class="post-meta">
-      <time datetime="" itemprop="datePublished" class="post-meta__date date"></time>
-      <span class="post-meta__tags tags"></span>
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2018-09-30 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2018-09-30</time>  
+    </p>
     </div>
-    <h1 class="post-title"></h1>
+	
+	
   </header>
 
   <section class="post">
-    
+    <h1 id="不同的子序列">不同的子序列</h1>
+<p>给定一个字符串 S 和一个字符串 T，计算在 S 的子序列中 T 出现的个数</p>
+<h3 id="递归思路">递归思路</h3>
+<ul>
+  <li>递归推进条件，S当前字符与字符串T当前字符相等，则向前推进</li>
+  <li>递归终止条件，字符串长度与T相等，则相同字符串结果+1</li>
+  <li>时间复杂度大，相当于在2^n基础上进行剪枝
+    <h3 id="动态规划">动态规划</h3>
+  </li>
+  <li>子序列问题的动态规划
+    <blockquote>
+      <p>要点关键在于将字符串相等的情况进行考虑
+将相等的情况列出来进行填图，可能还会与前一位相等
+```
+class Solution {
+  public int numDistinct(String s, String t) {
+      int x = t.length();
+      int y = s.length();</p>
+    </blockquote>
 
-<ul class="tag_box inline">
-    
-  
-
-
-  
-     
-    	<li><a href="#博客-ref">博客 <span>1</span></a></li>
-     
-    	<li><a href="#leetcode-ref">leetcode <span>1</span></a></li>
-    
-  
-
-
-
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  int[][] dp = new int[x+1][y+1];
+  for(int i = 0 ; i &lt;= x ; i++){
+      for(int j = 0 ; j &lt;= y ; j++){
+          if(j == 0 &amp;&amp; i != 0) dp[i][j] = 0;
+          else if(i == 0) dp[i][j] = 1;
+          else{
+              if(t.charAt(i-1) == s.charAt(j-1)) dp[i][j] = dp[i-1][j-1] + dp[i][j-1];
+              else dp[i][j] = dp[i][j-1];
+          }
+      }
+  }
+  return dp[x][y];   } } ```
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<div class = "card">
- 
-
-  <h3 id="博客-ref">博客</h3>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2018/09/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B/">jekyll搭建个人博客</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
- 
-
-  <h3 id="leetcode-ref">leetcode</h3>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2018/09/%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AD%90%E5%BA%8F%E5%88%97/">不同子序列问题</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-</div>
 
   </section>
 </article>
+
+<section>
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2018/09/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B/" data-toggle="tooltip" data-placement="top" title="jekyll搭建个人博客">上一篇：  <span>jekyll搭建个人博客</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+
 
             <section class="footer">
     <footer>
