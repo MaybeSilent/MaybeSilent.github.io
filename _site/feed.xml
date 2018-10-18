@@ -5,9 +5,132 @@
     <description>never give up</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 01 Oct 2018 00:15:44 +0800</pubDate>
-    <lastBuildDate>Mon, 01 Oct 2018 00:15:44 +0800</lastBuildDate>
+    <pubDate>Thu, 18 Oct 2018 22:36:22 +0800</pubDate>
+    <lastBuildDate>Thu, 18 Oct 2018 22:36:22 +0800</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>mybaits逆向生成</title>
+        <description>&lt;h1 id=&quot;mybatis逆向工程生成代码&quot;&gt;mybatis逆向工程生成代码&lt;/h1&gt;
+
+&lt;p&gt;初步接触mybaits框架，再次记录使用过程和问题解决方法&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;配置maven&lt;/p&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+  
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;mysql&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;mysql-connector-java&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;8.0.11&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+  
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;junit&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;junit&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.11&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+  
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.mybatis&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;mybatis&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.3.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+  
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;配置完成maven所依赖的包之后，就能够使用相应的mybaits框架了，我们这里主要是用mybaits通过逆向工程将数据库中的代码转化成相应的pojo类和mapper配置文件，逆向生成代码的关键是要配置相应的xml配置文件，在此列出配置文件个人认为关键部分&lt;/p&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;jdbcConnection&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;driverClass=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.mysql.cj.jdbc.Driver&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;connectionURL=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jdbc:mysql://127.0.0.1:3306/dbwork?useSSL=false&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;userId=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;root&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;root&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/jdbcConnection&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&amp;gt;&lt;/span&gt;
+  
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- targetProject:生成PO类的位置 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;javaModelGenerator&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;targetPackage=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Pojo&quot;&lt;/span&gt;
+                    &lt;span class=&quot;na&quot;&gt;targetProject=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.\src\main\java&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- enableSubPackages:是否让schema作为包的后缀 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;enableSubPackages&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 从数据库返回的值被清理前后的空格 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;trimStrings&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/javaModelGenerator&amp;gt;&lt;/span&gt;
+  
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- targetProject:mapper映射文件生成的位置 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 置于相应的resources文件夹下 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;sqlMapGenerator&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;targetPackage=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mapper&quot;&lt;/span&gt;
+                 &lt;span class=&quot;na&quot;&gt;targetProject=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.\src\main\resources&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- enableSubPackages:是否让schema作为包的后缀 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;enableSubPackages&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/sqlMapGenerator&amp;gt;&lt;/span&gt;
+  
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- targetPackage：mapper接口生成的位置 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 该接口属于java接口文件，所以置于源代码文件夹java下，作为内容参与编译 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;javaClientGenerator&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;XMLMAPPER&quot;&lt;/span&gt;
+                     &lt;span class=&quot;na&quot;&gt;targetPackage=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mapper&quot;&lt;/span&gt;
+                     &lt;span class=&quot;na&quot;&gt;targetProject=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.\src\main\java&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- enableSubPackages:是否让schema作为包的后缀 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;enableSubPackages&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/javaClientGenerator&amp;gt;&lt;/span&gt;
+  
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- java接口文件和xml mapper配置文件分开放置，其中xml配置文件置于resources文件夹下，接口类文件置于原文件夹代码下，可以使得程序整体目录结构清晰，不易出错 --&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;其余问题&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;db.properties文件配置写法&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;properties文件是java用于静态存放配置的文件，格式较xml来说简单，其中jdbc配置过程中，值不需要加相应的双引号&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jdbc.driver = com.mysql.cj.jdbc.Driver
+jdbc.url = jdbc:mysql://127.0.0.1:3306/dbwork?useSSL=false
+jdbc.username = root
+jdbc.password = root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;maven生成的工程目录结构问题&lt;/p&gt;
+        &lt;ul&gt;
+          &lt;li&gt;利用maven进行编译运行等，会出现resources文件无法加载的问题，会出现source not found&lt;/li&gt;
+          &lt;li&gt;解决方法，将resources文件夹加入到mavaen的&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;resources&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;resource&amp;gt;&lt;/span&gt;
+    	&lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;src/main/resources&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;includes&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;*.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;**/*.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;*.properties&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/includes&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/resource&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/resources&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 18 Oct 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/10/mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/10/mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81/</guid>
+        
+        <category>框架</category>
+        
+        
+      </item>
     
       <item>
         <title>不同子序列问题</title>
