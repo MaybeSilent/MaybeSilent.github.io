@@ -5,9 +5,169 @@
     <description>never give up</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Oct 2018 22:36:22 +0800</pubDate>
-    <lastBuildDate>Thu, 18 Oct 2018 22:36:22 +0800</lastBuildDate>
+    <pubDate>Tue, 26 Feb 2019 16:45:49 +0800</pubDate>
+    <lastBuildDate>Tue, 26 Feb 2019 16:45:49 +0800</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>两数之和问题</title>
+        <description>&lt;h1 id=&quot;两数之和问题&quot;&gt;两数之和问题&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/two-sum/description/&quot;&gt;两数之和&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。&lt;/li&gt;
+  &lt;li&gt;示例:
+给定 nums = [2, 7, 11, 15], target = 9
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;双重循环直接解答&quot;&gt;双重循环直接解答&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;直接双重循环进行判断，注意第二层循环的起点为第一层索引之后的一个值&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;时间复杂度大&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        for(int i = 0 ; i &amp;lt; nums.length ; i ++){
+            for(int j = i + 1 ; j &amp;lt; nums.length ; j++){
+                if(nums[i] + nums[j] == target){
+                    return new int[]{i,j};
+                }
+            }
+        }
+
+        return null;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;利用hashmap&quot;&gt;利用hashmap&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;hashmap存取之前读取到的值，再次读取之时，首先判断前面是否出现过&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;编程思想为利用hashmap进行判断是否存在的问题，时间复杂度为O(1)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap&amp;lt;Integer , Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;();
+        for(int i = 0 ; i &amp;lt; nums.length ; i++){
+            //先不放入自己
+            int anotherNum = target - nums[i];
+            if(map.containsKey(anotherNum)){
+                return new int[]{map.get(anotherNum) , i};
+            } else {
+                map.put(nums[i],i);
+            }
+            //map.put();
+        }
+
+        return null;
+        /**
+         * 错误写法，先将所有值存入map之中，这样对于两个相同的数字无法进行相应的判断
+         */
+
+        /*
+        HashMap&amp;lt;Integer,Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;();
+        for(int i = 0 ; i &amp;lt; nums.length ; i ++){
+            map.put(nums[i] , i);
+        }
+        for(int num : map.keySet()){
+            int anotherNum = target - num ;
+            if(map.containsKey(anotherNum)){
+                if(map.get(anotherNum) != map.get(num)){
+                    return new int[]{map.get(anotherNum) , map.get(num)};
+                } else continue;
+            }
+        }
+
+        return null;
+        */
+    }
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] result = null;
+        result = solution.twoSum(new int[]{3,2,4} , 6);
+        if(result == null){
+            System.out.println(&quot;Error Happened !!!&quot;);
+            return ;
+        }
+        for(int i : result){
+            System.out.println(i); 
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;先排序后查找&quot;&gt;先排序后查找&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;先将输入的数组进行排序后，再利用逼近的方法求解&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;时间复杂度分析，查找的时间复杂度为O(n),但是数组的排序为O(nlogn),所以总的时间复杂度为O(nlogn)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+public int[] twoSum(int[] nums, int target){
+    int[] arrayCopy = new int[nums.length];
+    System.arraycopy(nums , 0 , arrayCopy , 0 , nums.length);
+
+    Arrays.sort(nums);
+    int start = 0 ;
+    int end = nums.length - 1;
+
+    int compareNum = nums[start] + nums[end];
+    while(compareNum != target){
+        if(compareNum &amp;lt; target) start++;
+        else end--;
+        if(start &amp;gt;= end) break;
+        compareNum = nums[start] + nums[end];
+    }
+
+    if(start &amp;gt;= end) return null; //按照题意不可能发生
+
+    int[] result = new int[2];
+    int count = 0;
+    for(int i = 0 ; i &amp;lt; nums.length ; i++){
+        if(arrayCopy[i] == nums[start] || arrayCopy[i] == nums[end]){
+            result[count++] = i;
+            if(count == 2) return result;
+        }
+    }
+    return null;
+
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Tue, 26 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/02/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/02/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+        
+        <category>leetcode</category>
+        
+        
+      </item>
     
       <item>
         <title>mybaits逆向生成</title>
