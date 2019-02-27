@@ -123,6 +123,48 @@
   <ol class="post-list">
     
     <li>
+      <h2 class="post-list__post-title post-title"><a href="/2019/02/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/" title="访问 生产者消费者模式">生产者消费者模式</a></h2>
+      <p class="excerpt">生产者消费者模式  生产者消费者通常用于线程之间进行同步，用于生产者与消费者共用同一个存储空间的情况  可以直接用阻塞队列LinkedBlockingQueue进行相应的实现，也可以使用wait，notify机制进行实现  生产者代码package designpattern.procedureconsumer;class procedureconsumer implements Runnable {    private Object lock;    private Container...&hellip;</p>
+      <div class="post-list__meta">        
+        <time datetime="2019-02-27 00:00:00 +0800" class="post-list__meta--date date">
+          <img src="/images/calendar.png" width="20px" /> 
+          2019-02-27</time> 
+        <div class = "tag-img-icon">
+          <img src="/images/tag-icon.svg" width="20px" /> 
+        </div>
+        <a href="/tags">
+          <div class = "post-list-icon-mate">
+            <span class="post-list__meta--tags-right">设计模式</span>
+          </div>
+          <div class = "post-list-small-mate">
+          <a class="btn-border-small" href=/2019/02/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/>阅读全文 » </a>
+          </div>
+      </div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2019/02/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="访问 单例模式">单例模式</a></h2>
+      <p class="excerpt">单例模式  单例模式有多种写法，下面展示三种，一种简单的写法，另外两种实现了延迟加载的写法  这三种写法都是线程安全的单例模式写法package designpattern.singleton;/** * 单例模式的三种写法 *//** * output： * 第一种，最简单的写法 * 缺点：从类初始化开始就存在，并未实现延迟加载机制 */class firstSingle{    //static final     private  static final firstSingle  ...&hellip;</p>
+      <div class="post-list__meta">        
+        <time datetime="2019-02-26 00:00:00 +0800" class="post-list__meta--date date">
+          <img src="/images/calendar.png" width="20px" /> 
+          2019-02-26</time> 
+        <div class = "tag-img-icon">
+          <img src="/images/tag-icon.svg" width="20px" /> 
+        </div>
+        <a href="/tags">
+          <div class = "post-list-icon-mate">
+            <span class="post-list__meta--tags-right">设计模式</span>
+          </div>
+          <div class = "post-list-small-mate">
+          <a class="btn-border-small" href=/2019/02/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/>阅读全文 » </a>
+          </div>
+      </div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
       <h2 class="post-list__post-title post-title"><a href="/2019/02/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" title="访问 两数之和问题">两数之和问题</a></h2>
       <p class="excerpt">两数之和问题  两数之和  给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。  示例:给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]双重循环直接解答  直接双重循环进行判断，注意第二层循环的起点为第一层索引之后的一个值  时间复...&hellip;</p>
       <div class="post-list__meta">        
