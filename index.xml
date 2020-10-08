@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MaybeSilent</title>
-    <link>maybesilent.github.io/</link>
+    <link>/</link>
     <description>Recent content on MaybeSilent</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 08 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="maybesilent.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo自制博客</title>
-      <link>maybesilent.github.io/post/hugo/</link>
+      <link>/post/hugo/</link>
       <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>maybesilent.github.io/post/hugo/</guid>
+      <guid>/post/hugo/</guid>
       <description>&lt;p&gt;hugo是Go语言编写的一款静态网页生成，类似的静态网页生成软件还有jekyll，hexo等&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>简介</title>
-      <link>maybesilent.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>maybesilent.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>👋，关注golang，java相关技术，乐于学习交流</description>
     </item>
     

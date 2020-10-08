@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on MaybeSilent</title>
-    <link>maybesilent.github.io/series/</link>
+    <link>/series/</link>
     <description>Recent content in Series on MaybeSilent</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright><atom:link href="maybesilent.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright><atom:link href="/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
